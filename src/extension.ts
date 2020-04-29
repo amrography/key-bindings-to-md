@@ -98,7 +98,7 @@ async function generateTheFile(sortby:string) {
 	if (!sets) return;
 	
 	const wsPath = workspaceFolders[0].uri.fsPath; // gets the path of the first workspace folder
-	const uri = `${wsPath}/key/${Date.now()}.md`;
+	const uri = `${wsPath}/.vscode/ext-${Date.now()}.md`;
 	const newFile = vscode.Uri.parse(`untitled:${uri}`);
 	let definitions = await openDefaultKeyBindings();
 	let content:any = [
@@ -124,7 +124,7 @@ async function generateTheFile(sortby:string) {
 			}
 		});
 	})
-	vscode.window.showInformationMessage(`Generated a new file: ${uri}`);
+	vscode.window.showInformationMessage(`Don't forget to save it, default location: ${uri}`);
 }
 
 export function activate(context: vscode.ExtensionContext) {

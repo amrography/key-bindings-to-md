@@ -3,12 +3,26 @@
 	"displayName": "Print keymaping shortcut",
 	"description": "Get a .md and .pdf file of your shortcuts",
 	"version": "0.1.0",
+	"publisher": "akhaled",
+	"icon": "icon.png",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"license": "MIT",
+	"keywords": [
+		"markdown",
+		"keybindings",
+		"key",
+		"bindings",
+		"shortcut"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/amrography/key-bindings-to-md.git"
+	},
 	"activationEvents": [
 		"onCommand:print-keymaping-shortcut.generateKeybindinsShortcuts",
 		"onCommand:print-keymaping-shortcut.generateKeybindinsShortcutsSortedByKeys"
@@ -18,11 +32,13 @@
 		"commands": [
 			{
 				"command": "print-keymaping-shortcut.generateKeybindinsShortcuts",
-				"title": "Print keymaping shorcuts to markdown file"
+				"title": "Print keymaping shorcuts to markdown file",
+				"group": "print-keymaping-shortcut"
 			},
 			{
 				"command": "print-keymaping-shortcut.generateKeybindinsShortcutsSortedByKeys",
-				"title": "Print keymaping shorcuts to markdown file - sorted by keys"
+				"title": "Print keymaping shorcuts to markdown file - sorted by keys",
+				"group": "print-keymaping-shortcut"
 			}
 		]
 	},
