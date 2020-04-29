@@ -17,7 +17,15 @@ Sort by command name
 Sort by key
 
 - `keybindings: Generate markdown - sort by keys`
+
+Group by extension name, sorted by command name
+
+- `Keybindings: Generate markdown (Group by extension name)`
+  
+Group by extension name, sorted by key
+
+- `Keybindings: Generate markdown (Group by extension name) - sort by keys`
   
 ---
 
-Default output location is **.vscode/ext-{timestamp}.md**. You need to hit cmd+s to save the file.
+Default output location is **.vscode/keybindings.md**. You need to hit cmd+s to save the file.
