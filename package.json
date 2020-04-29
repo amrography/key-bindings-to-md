@@ -2,7 +2,7 @@
 	"name": "key-bindings-to-md",
 	"displayName": "Print keymaping shortcut",
 	"description": "Get a markdown file of your shortcuts key bindings",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"publisher": "akhaled",
 	"icon": "icon.png",
 	"engines": {
