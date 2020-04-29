@@ -1,8 +1,8 @@
 {
-	"name": "print-keymaping-shortcut",
+	"name": "key-bindings-to-md",
 	"displayName": "Print keymaping shortcut",
-	"description": "Get a .md and .pdf file of your shortcuts",
-	"version": "0.1.0",
+	"description": "Get a markdown file of your shortcuts key bindings",
+	"version": "0.2.0",
 	"publisher": "akhaled",
 	"icon": "icon.png",
 	"engines": {
@@ -24,21 +24,21 @@
 		"url": "https://github.com/amrography/key-bindings-to-md.git"
 	},
 	"activationEvents": [
-		"onCommand:print-keymaping-shortcut.generateKeybindinsShortcuts",
-		"onCommand:print-keymaping-shortcut.generateKeybindinsShortcutsSortedByKeys"
+		"onCommand:key-bindings-to-md.generateKeybindinsShortcuts",
+		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "print-keymaping-shortcut.generateKeybindinsShortcuts",
-				"title": "Print keymaping shorcuts to markdown file",
-				"group": "print-keymaping-shortcut"
+				"command": "key-bindings-to-md.generateKeybindinsShortcuts",
+				"title": "keybindings: Generate markdown",
+				"group": "key-bindings-to-md"
 			},
 			{
-				"command": "print-keymaping-shortcut.generateKeybindinsShortcutsSortedByKeys",
-				"title": "Print keymaping shorcuts to markdown file - sorted by keys",
-				"group": "print-keymaping-shortcut"
+				"command": "key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys",
+				"title": "keybindings: Generate markdown - sort by keys",
+				"group": "key-bindings-to-md"
 			}
 		]
 	},

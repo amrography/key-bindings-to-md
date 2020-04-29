@@ -130,8 +130,8 @@ async function generateTheFile(sortby:string) {
 export function activate(context: vscode.ExtensionContext) {
 	
 	context.subscriptions.push(
-		vscode.commands.registerCommand('print-keymaping-shortcut.generateKeybindinsShortcuts', () => generateTheFile('commands')),
-		vscode.commands.registerCommand('print-keymaping-shortcut.generateKeybindinsShortcutsSortedByKeys', () => generateTheFile('keys'))
+		vscode.commands.registerCommand('key-bindings-to-md.generateKeybindinsShortcuts', () => generateTheFile('commands')),
+		vscode.commands.registerCommand('key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys', () => generateTheFile('keys'))
 	);
 }
 
