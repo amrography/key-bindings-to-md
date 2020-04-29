@@ -27,6 +27,7 @@
 		"onCommand:key-bindings-to-md.generateKeybindinsShortcuts",
 		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys",
 		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsGroupByExtension",
+		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsGroupByExtensionSortByKeys"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
