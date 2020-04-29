@@ -25,7 +25,8 @@
 	},
 	"activationEvents": [
 		"onCommand:key-bindings-to-md.generateKeybindinsShortcuts",
-		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys"
+		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys",
+		"onCommand:key-bindings-to-md.generateKeybindinsShortcutsGroupByExtension",
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -38,6 +39,16 @@
 			{
 				"command": "key-bindings-to-md.generateKeybindinsShortcutsSortedByKeys",
 				"title": "keybindings: Generate markdown - sort by keys",
+				"group": "key-bindings-to-md"
+			},
+			{
+				"command": "key-bindings-to-md.generateKeybindinsShortcutsGroupByExtension",
+				"title": "keybindings: Generate markdown (Group by extension name)",
+				"group": "key-bindings-to-md"
+			},
+			{
+				"command": "key-bindings-to-md.generateKeybindinsShortcutsGroupByExtensionSortByKeys",
+				"title": "keybindings: Generate markdown (Group by extension name) - sort by keys",
 				"group": "key-bindings-to-md"
 			}
 		]
