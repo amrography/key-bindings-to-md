@@ -2,6 +2,10 @@
 
 All notable changes to the "key-bindings-to-md" extension will be documented in this file.
 
+## [0.3.1]
+
+- Select only specific extension (group) to display
+
 ## [0.3.0]
 
 - Display all keys for 2 sets choice

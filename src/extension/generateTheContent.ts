@@ -19,28 +19,17 @@ export class generateTheContent {
             let content:any = [];
 
             if (groupby == 'extension') {
-                for (const head in rows) {
-                    if (rows.hasOwnProperty(head)) {
-                        content.push({
-                            vscodeTable: {
-                                head: humanizeString(head),
-                                rows: rows[head],
-                                sortby: sortby,
-                                sets: parseInt(sets),
-                            }
-                        })
+                let wanted:string = await askForGroupOnly(rows);
+                if (wanted == 'all') {
+                    for (const head in rows) {
+                        if (rows.hasOwnProperty(head)) content.push(getMarkDownTable(head, rows[head], sortby, sets))
                     }
-                }
-            } else {
-                content = {
-                    vscodeTable: {
-                        head: "Keyboard shortcuts",
-                        rows: rows,
-                        sortby: sortby,
-                        sets: parseInt(sets),
-                    }
+                } else {
+                    if (rows.hasOwnProperty(wanted)) content = getMarkDownTable(wanted, rows[wanted], sortby, sets)
+                    else window.showErrorMessage(`Error, can't find keys within ${wanted} group`)
                 }
             }
+            else content = getMarkDownTable("Keyboard shortcuts", rows, sortby, sets)
 
             resolve(json2md(content));
         });
@@ -54,6 +43,24 @@ async function askForSets(): Promise<string> {
         value: '6'
     })
     return new Promise((resolve) => resolve(sets))
+}
+
+async function askForGroupOnly(rows:any): Promise<string> {
+    let groups = Object.keys(rows);
+    groups.push('All')
+    const group_name = await window.showQuickPick(groups);
+    return new Promise((resolve) => resolve(group_name))
+}
+
+function getMarkDownTable(head:string, rows:any, sortby:string, sets:string) {
+    return {
+        vscodeTable: {
+            head: humanizeString(head),
+            rows: rows,
+            sortby: sortby,
+            sets: parseInt(sets),
+        }
+    };
 }
 
 async function openDefaultKeyBindings() {
@@ -73,27 +80,29 @@ function parseRows(json:any, groupby:string): any {
     switch (groupby) {
         case 'extension':
             return groupRowsByExtensionName(inputs);
-            break;
         default:
-            return inputs.map((col:any) => [
-                `${shortcutToSymbol(col.key)}`,
-                `${humanizeString(col.command.split('.').join(' '))}`
-            ]);
-            break;
+            return inputs.map((col:any) => {
+                return[
+                    `${shortcutToSymbol(col.key)}`,
+                    `${humanReading(col.command.split('.').join(' '))}`
+                ]
+            })
     }
 }
 
 function groupRowsByExtensionName(inputs:any): any {
     let group:any = {};
     inputs.forEach((col:any) => {
-        let extension_name = col.command.split('.')[0],
+        let splitted = col.command.split('.'),
+            extension_name = splitted[0],
             property = col.command.split(`${extension_name}.`).join('').split('.').join(' ');
 
+        if (splitted.length < 2) extension_name = 'WithoutGroup';
         if (!group[extension_name]) group[extension_name] = [];
 
         group[extension_name].push([
             `${shortcutToSymbol(col.key)}`,
-            `${humanizeString(property)}`
+            `${humanReading(property)}`
         ])
     })
 
@@ -175,4 +184,11 @@ function shortcutToSymbolAssist(item:string, os:string, skip:any, arrows:any) {
     return item.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]+/)
         ? item
 	    : `**${keyboardSymbol(item, os)}**`
+}
+
+function humanReading(str:string) {
+    let description = humanizeString(str)
+    let splitted = description.split(' ')
+    let first_word = splitted.pop()
+    return `**${first_word.toUpperCase()}** ${splitted.join(' ')}`;
 }
