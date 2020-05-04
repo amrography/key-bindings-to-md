@@ -5,7 +5,7 @@ const keyboardSymbol = require('keyboard-symbol')
 const json2md = require("json2md")
 
 export class generateTheContent {
-    static async content(sortby:string, groupby:string): Promise<string> {
+    static async content(sortby:string, groupby:string, excluded:any): Promise<string> {
         const sets:string = await askForSets();
 
         return new Promise(async (resolve) => {
@@ -15,12 +15,12 @@ export class generateTheContent {
                 return resolve(undefined);
             }
 
-            let rows = parseRows(await openDefaultKeyBindings(), groupby);
+            let rows = parseRows(await openDefaultKeyBindings(), groupby, excluded);
             let content:any = [];
 
             if (groupby == 'extension') {
                 let wanted:string = await askForGroupOnly(rows);
-                if (wanted == 'all') {
+                if (wanted == 'All') {
                     for (const head in rows) {
                         if (rows.hasOwnProperty(head)) content.push(getMarkDownTable(head, rows[head], sortby, sets))
                     }
@@ -74,14 +74,16 @@ async function openDefaultKeyBindings() {
 	return definitions;
 }
 
-function parseRows(json:any, groupby:string): any {
+function parseRows(json:any, groupby:string, excluded:any): any {
     let inputs = jsonc.parse(json);
     
     switch (groupby) {
         case 'extension':
-            return groupRowsByExtensionName(inputs);
+            return groupRowsByExtensionName(inputs, excluded);
         default:
             return inputs.map((col:any) => {
+                if (excluded.indexOf(col.command) > -1) return;
+                
                 return[
                     `${shortcutToSymbol(col.key)}`,
                     `${humanReading(col.command.split('.').join(' '))}`
@@ -90,9 +92,11 @@ function parseRows(json:any, groupby:string): any {
     }
 }
 
-function groupRowsByExtensionName(inputs:any): any {
+function groupRowsByExtensionName(inputs:any, excluded:any): any {
     let group:any = {};
     inputs.forEach((col:any) => {
+        if (excluded.indexOf(col.command) > -1) return;
+
         let splitted = col.command.split('.'),
             extension_name = splitted[0],
             property = col.command.split(`${extension_name}.`).join('').split('.').join(' ');

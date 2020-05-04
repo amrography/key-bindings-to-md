@@ -2,6 +2,11 @@
 
 All notable changes to the "key-bindings-to-md" extension will be documented in this file.
 
+## [0.4.0]
+
+- Fix: Display `All` extension groups when selecting `All`
+- New: Now, you can ignore keybindings from displaying out by adding them to settings. I have already added some commands to ignore by default
+
 ## [0.3.1]
 
 - Select only specific extension (group) to display
