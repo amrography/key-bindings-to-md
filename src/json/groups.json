@@ -1,0 +1,82 @@
+[
+    {
+        "name": "General",
+        "display_order": "1",
+        "items": {
+            "workbench": {
+                "action": {
+                    "showCommands": "Show Command Palette",
+                    "quickOpen": "Quick Open, Go to File…",
+                    "newWindow": "New window/instance",
+                    "closeActiveEditor" : "Close active editor",
+                    "closeGroup" : "Close instance",
+                    "closeWindow" : "Close window",
+                    "openSettings": "User Settings",
+                    "openGlobalKeybindings": "Keyboard Shortcuts"
+                }
+            }
+        }
+    },
+    {
+        "name": "Basic editing",
+        "display_order": "2",
+        "items": {
+            "editor": {
+                "action": {
+                    "clipboardCutAction": "Cut line",
+                    "clipboardCopyAction": "Copy line",
+                    "moveLinesDownAction": "Move line down",
+                    "moveLinesUpAction": "Move line up",
+                    "copyLinesDownAction": "Copy line down",
+                    "copyLinesUpAction": "Copy line up",
+                    "deleteLines": "Delete line",
+                    "insertLineAfter": "Insert line below",
+                    "insertLineBefore": "Insert line below",
+                    "jumpToBracket": "Jump to matching bracket",
+                    "indentLines": "Indent line",
+                    "outdentLines": "Outdent line",
+                    "cursorHome": "Go to beginning of line",
+                    "cursorEnd": "Go to end of line",
+                    "scrollLineUp": "Scroll line up",
+                    "scrollLineDown": "Scroll line down"
+                }
+            }
+        }
+    },
+    {
+        "name": "Multi-cursor and selection",
+        "display_order": "3"
+    },
+    {
+        "name": "Search and replace",
+        "display_order": "4"
+    },
+    {
+        "name": "Rich languages editing",
+        "display_order": "5"
+    },
+    {
+        "name": "Navigation",
+        "display_order": "6"
+    },
+    {
+        "name": "Editor management",
+        "display_order": "7"
+    },
+    {
+        "name": "File management",
+        "display_order": "8"
+    },
+    {
+        "name": "Display",
+        "display_order": "9"
+    },
+    {
+        "name": "Debug",
+        "display_order": "10"
+    },
+    {
+        "name": "Integrated terminal",
+        "display_order": "11"
+    }
+]
