@@ -2,46 +2,16 @@
     {
         "name": "General",
         "display_order": "1",
-        "items": {
-            "workbench": {
-                "action": {
-                    "showCommands": "Show Command Palette",
-                    "quickOpen": "Quick Open, Go to File…",
-                    "newWindow": "New window/instance",
-                    "closeActiveEditor" : "Close active editor",
-                    "closeGroup" : "Close instance",
-                    "closeWindow" : "Close window",
-                    "openSettings": "User Settings",
-                    "openGlobalKeybindings": "Keyboard Shortcuts"
-                }
-            }
-        }
+        "items": [
+            "workbench.action"
+        ]
     },
     {
         "name": "Basic editing",
         "display_order": "2",
-        "items": {
-            "editor": {
-                "action": {
-                    "clipboardCutAction": "Cut line",
-                    "clipboardCopyAction": "Copy line",
-                    "moveLinesDownAction": "Move line down",
-                    "moveLinesUpAction": "Move line up",
-                    "copyLinesDownAction": "Copy line down",
-                    "copyLinesUpAction": "Copy line up",
-                    "deleteLines": "Delete line",
-                    "insertLineAfter": "Insert line below",
-                    "insertLineBefore": "Insert line below",
-                    "jumpToBracket": "Jump to matching bracket",
-                    "indentLines": "Indent line",
-                    "outdentLines": "Outdent line",
-                    "cursorHome": "Go to beginning of line",
-                    "cursorEnd": "Go to end of line",
-                    "scrollLineUp": "Scroll line up",
-                    "scrollLineDown": "Scroll line down"
-                }
-            }
-        }
+        "items": [
+            "editor.action"
+        ]
     },
     {
         "name": "Multi-cursor and selection",

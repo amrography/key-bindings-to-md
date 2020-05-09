@@ -20,6 +20,8 @@ export class generateTheContent {
 
             if (groupby == 'extension') {
                 let wanted:string = await askForGroupOnly(rows);
+                console.info(wanted);
+                console.log(rows);
                 if (wanted == 'All') {
                     for (const head in rows) {
                         if (rows.hasOwnProperty(head)) content.push(getMarkDownTable(head, rows[head], sortby, sets))
@@ -45,10 +47,37 @@ async function askForSets(): Promise<string> {
     return new Promise((resolve) => resolve(sets))
 }
 
-async function askForGroupOnly(rows:any): Promise<string> {
+async function askForGroupOnly(rows:any, parent_group:string = ''): Promise<string> {
     let groups = Object.keys(rows);
-    groups.push('All')
-    const group_name = await window.showQuickPick(groups);
+    let group_name:any = '';
+
+    if (groups.length > 0) {
+        groups.push('All');
+        group_name = await window.showQuickPick(groups);
+    } 
+
+    if (group_name) {
+        let nested:any = {};
+        let tmp = parent_group.length > 0 ? group_name.split(`${parent_group}\.`).join('') : group_name;
+        
+        if (rows[tmp]) {
+            rows[tmp].forEach((arr:any) => {
+                // editor.actions.commandExample [3]
+                // actions.commandExample [2]
+                let splitted = arr[2].command.split('.');
+                if (splitted.length > 2) {
+                    let key:string = splitted[1];
+
+                    arr[2].command = arr[2].command.split(`${group_name}\.`).join('')
+                    !nested[key] && (nested[key] = []);
+                    nested[key].push(row(arr[0], arr[2].command, arr[2]))
+                }
+            });
+
+            group_name += `.${await askForGroupOnly(nested, group_name)}`;
+        }
+    }
+
     return new Promise((resolve) => resolve(group_name))
 }
 
@@ -84,10 +113,7 @@ function parseRows(json:any, groupby:string, excluded:any): any {
             return inputs.map((col:any) => {
                 if (excluded.indexOf(col.command) > -1) return;
                 
-                return[
-                    `${shortcutToSymbol(col.key)}`,
-                    `${humanReading(col.command.split('.').join(' '))}`
-                ]
+                return row(col.key, col.command.split('.').join(' '), col)
             })
     }
 }
@@ -104,10 +130,7 @@ function groupRowsByExtensionName(inputs:any, excluded:any): any {
         if (splitted.length < 2) extension_name = 'WithoutGroup';
         if (!group[extension_name]) group[extension_name] = [];
 
-        group[extension_name].push([
-            `${shortcutToSymbol(col.key)}`,
-            `${humanReading(property)}`
-        ])
+        group[extension_name].push(row(col.key, property, col))
     })
 
     let keys = [],
@@ -195,4 +218,12 @@ function humanReading(str:string) {
     let splitted = description.split(' ')
     let first_word = splitted.pop()
     return `**${first_word.toUpperCase()}** ${splitted.join(' ')}`;
+}
+
+function row(shortcut:string, description:string, col:any) {
+    return [
+        `${shortcutToSymbol(shortcut)}`,
+        `${humanReading(description)}`,
+        col
+    ]
 }
